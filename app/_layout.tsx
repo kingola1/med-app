@@ -9,6 +9,8 @@ export const unstable_settings = {
   anchor: '(tabs)',
 };
 
+import "../global.css";
+
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
