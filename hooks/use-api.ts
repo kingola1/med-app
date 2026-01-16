@@ -43,3 +43,35 @@ export const usePost = <T, D>(
 		...options,
 	});
 };
+
+// Generic putter function
+const putter = async <T, D>(url: string, data: D): Promise<T> => {
+	const response = await apiClient.put<T>(url, data);
+	return response.data;
+};
+
+export const usePut = <T, D>(
+	url: string,
+	options?: UseMutationOptions<T, Error, D>
+) => {
+	return useMutation<T, Error, D>({
+		mutationFn: (data: D) => putter<T, D>(url, data),
+		...options,
+	});
+};
+
+// Generic patcher function
+const patcher = async <T, D>(url: string, data: D): Promise<T> => {
+	const response = await apiClient.patch<T>(url, data);
+	return response.data;
+};
+
+export const usePatch = <T, D>(
+	url: string,
+	options?: UseMutationOptions<T, Error, D>
+) => {
+	return useMutation<T, Error, D>({
+		mutationFn: (data: D) => patcher<T, D>(url, data),
+		...options,
+	});
+};
